@@ -67,27 +67,28 @@ class MessageRequestItem extends StatelessWidget {
                   ),
                   padding: EdgeInsets.all(8),
                 ),
+
                 onPressed: () {
                   // Add your onPressed functionality here for the check button
                   print("Check button pressed");
                 },
-                child: Icon(Icons.check, color: Colors.white),
+                child: Text("Connect", style: TextStyle(color: Colors.white, fontSize: 18)),
               ),
               SizedBox(width: 8),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsets.all(8),
-                ),
-                onPressed: () {
-                  // Add your onPressed functionality here for the close button
-                  print("Close button pressed");
-                },
-                child: Icon(Icons.close, color: Colors.white),
-              ),
+              // ElevatedButton(
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Colors.red,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //     padding: EdgeInsets.all(8),
+              //   ),
+              //   onPressed: () {
+              //     // Add your onPressed functionality here for the close button
+              //     print("Close button pressed");
+              //   },
+              //   child: Icon(Icons.close, color: Colors.white, size: 27,),
+              // ),
             ],
           ),
         ],

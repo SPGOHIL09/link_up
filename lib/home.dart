@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:link_up/geo_messages.dart';
+import 'package:link_up/messageReqDisc.dart';
 import 'package:link_up/profile.dart';
 
 class HomePage extends StatelessWidget {
@@ -74,12 +75,12 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 24),
             _buildFeatureGrid(context),
             const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _buildConnectionStatus(context),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: _buildConnectionStatus(context),
+            // ),
             const SizedBox(height: 24),
-            _buildRecentConnections(context),
+            // _buildRecentConnections(context),
           ],
         ),
       ),
@@ -125,6 +126,16 @@ class HomePage extends StatelessWidget {
         children: [
           _buildFeatureCard(
             context: context,
+            icon: Icons.chat_bubble,
+            title: 'Chat',
+            subtitle: 'Direct messaging',
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  MessageReqDiscScreen()));
+            },
+
+          ),
+          _buildFeatureCard(
+            context: context,
             icon: Icons.location_on,
             title: 'Geo Messages',
             subtitle: 'Location-based messaging',
@@ -133,19 +144,12 @@ class HomePage extends StatelessWidget {
             },
 
           ),
-          _buildFeatureCard(
-            context: context,
-            icon: Icons.chat_bubble,
-            title: 'P2P Chat',
-            subtitle: 'Direct messaging',
-            onTap: () {},
 
-          ),
           _buildFeatureCard(
             context: context,
             icon: Icons.campaign,
             title: 'Broadcast',
-            subtitle: 'Send to everyone nearby',
+            subtitle: 'Coming Soon....',
             onTap: () {},
 
           ),
@@ -153,7 +157,7 @@ class HomePage extends StatelessWidget {
             context: context,
             icon: Icons.folder_shared,
             title: 'File Sharing',
-            subtitle: 'Share files instantly',
+            subtitle: 'Coming Soon....',
             onTap: () {},
 
           ),

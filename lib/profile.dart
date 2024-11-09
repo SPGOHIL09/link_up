@@ -76,59 +76,61 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 1,
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF375FFF),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Text(
-                          avatarEmojis[selectedAvatarIndex],
-                          style: const TextStyle(fontSize: 40),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF375FFF),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            avatarEmojis[selectedAvatarIndex],
+                            style: const TextStyle(fontSize: 40),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    Wrap(
-                      spacing: 16,
-                      runSpacing: 16,
-                      alignment: WrapAlignment.center,
-                      children: List.generate(
-                        avatarEmojis.length,
-                        (index) => GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedAvatarIndex = index;
-                            });
-                          },
-                          child: Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: selectedAvatarIndex == index
-                                  ? const Color(0xFF375FFF)
-                                  : const Color(0xFF152033),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: const Color(0xFF375FFF),
-                                width: 2,
+                      const SizedBox(height: 24),
+                      Wrap(
+                        spacing: 16,
+                        runSpacing: 16,
+                        alignment: WrapAlignment.center,
+                        children: List.generate(
+                          avatarEmojis.length,
+                          (index) => GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedAvatarIndex = index;
+                              });
+                            },
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: selectedAvatarIndex == index
+                                    ? const Color(0xFF375FFF)
+                                    : const Color(0xFF152033),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(0xFF375FFF),
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                avatarEmojis[index],
-                                style: const TextStyle(fontSize: 24),
+                              child: Center(
+                                child: Text(
+                                  avatarEmojis[index],
+                                  style: const TextStyle(fontSize: 24),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 32),

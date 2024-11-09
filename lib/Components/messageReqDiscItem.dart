@@ -20,6 +20,7 @@ class MessageReqDiscItem extends StatelessWidget {
 
     return Column(
       children: [
+        SizedBox(height: 35,),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(

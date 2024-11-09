@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'home.dart';
+
 class GeoMessagesPage extends StatefulWidget {
   const GeoMessagesPage({Key? key}) : super(key: key);
 
@@ -58,20 +60,66 @@ class _GeoMessagesPageState extends State<GeoMessagesPage> {
           },
         ),
       ),
-      body: ListView.builder(
-        itemCount: _messages.length,
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          final message = _messages[index];
-          return GeoMessageCard(
-            sender: message.sender,
-            title: message.title,
-            message: message.message,
-            timestamp: message.timestamp,
-            latitude: message.latitude,
-            longitude: message.longitude,
-          );
-        },
+      body: Column(
+        children: [
+          Container(
+            margin:  const EdgeInsets.only(top:16, left: 16, right: 16),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Save profile changes
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Profile updated successfully'),
+                      backgroundColor: Color(0xFF375FFF),
+                    ),
+                  );
+
+                  // Navigate to the homepage
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            HomePage()), // Replace `HomePage` with your actual homepage widget
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF375FFF),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Search Messages Nearby',
+                  style: TextStyle(
+                    color: Color(0xFFF7F7FC),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _messages.length,
+              padding: const EdgeInsets.all(16),
+              itemBuilder: (context, index) {
+                final message = _messages[index];
+                return GeoMessageCard(
+                  sender: message.sender,
+                  title: message.title,
+                  message: message.message,
+                  timestamp: message.timestamp,
+                  latitude: message.latitude,
+                  longitude: message.longitude,
+                );
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF375FFF),

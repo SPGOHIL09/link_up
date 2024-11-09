@@ -63,7 +63,7 @@ class _Landingpage3State extends State<Landingpage3> {
                   ),
                 ),
                 Text(
-                  'Connect easily with \nyour family and friends\n over local areas',
+                  'Geo Messaging: Messages connected to your location',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -71,34 +71,49 @@ class _Landingpage3State extends State<Landingpage3> {
                     fontSize: 25,
                   ),
                 ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to the homepage
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(), // Replace HomePage with your homepage widget
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: Text(
-                    'Create Profile',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                SizedBox(height: 8),
+                Text(
+                  'Get Meassages floating around your place',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 17,
                   ),
                 ),
+                SizedBox(height: 25),
               ],
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 650),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigate to the homepage
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfilePage(), // Replace HomePage with your homepage widget
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  'Create Profile',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
           Align(

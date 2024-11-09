@@ -62,7 +62,7 @@ class MessageDiscoverItem extends StatelessWidget {
             },
             child: Row(
               children: [
-                Icon(Icons.person_add, color: Colors.white),
+                Icon(Icons.person_add, color: Colors.white, size: 20,),
                 SizedBox(width: 4),
                 Text(
                   "Invite",

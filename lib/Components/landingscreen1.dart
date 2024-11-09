@@ -61,12 +61,22 @@ class _Landingpage1State extends State<Landingpage1> {
                 ),
               ),
                 Text(
-                  'Connect easily with \nyour family and friends\n over local areas',
+                  'Bridging Connections \nBeyond the Internet',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                     fontSize: 25,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Seamlessly connect with people around you',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 17,
                   ),
                 ),
                 SizedBox(height: 20),

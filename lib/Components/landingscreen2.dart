@@ -61,7 +61,7 @@ class _Landingpage2State extends State<Landingpage2> {
                 ),
               ),
                 Text(
-                  'Connect easily with \nyour family and friends\n over local areas',
+                  'Chat seamlessly with your \nnearby peoples',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -69,7 +69,16 @@ class _Landingpage2State extends State<Landingpage2> {
                     fontSize: 25,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 8),
+                Text(
+                  'Easy and Reliable messaging \nusing WiFi Direct',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Colors.white,
+                    fontSize: 17,
+                  ),
+                ),
               ],
             ),
           ),

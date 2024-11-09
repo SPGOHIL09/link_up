@@ -4,11 +4,13 @@ class MessageReqDiscItem extends StatelessWidget {
   final String text;
   final String messageText;
   final IconData icon;
+  final VoidCallback onPressed;
 
   const MessageReqDiscItem({
     required this.text,
     required this.messageText,
     required this.icon,
+    required this.onPressed,
   });
 
   @override
@@ -60,7 +62,7 @@ class MessageReqDiscItem extends StatelessWidget {
             ),
             padding: EdgeInsets.all(screenWidth * 0.03),
           ),
-          onPressed: () {},
+          onPressed:onPressed,
           child: Center(
             child: Text(
               messageText,

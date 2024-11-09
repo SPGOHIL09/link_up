@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:link_up/home.dart';
+import 'package:link_up/profile.dart';
 
 class Landingpage3 extends StatefulWidget {
   const Landingpage3({super.key});
@@ -11,7 +13,7 @@ class _Landingpage3State extends State<Landingpage3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xFF0F1828),
+      backgroundColor: Color(0xFF0F1828),
       body: Stack(
         children: [
           Center(
@@ -19,47 +21,47 @@ class _Landingpage3State extends State<Landingpage3> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Top illustrations
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Left illustration
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade100,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.blue,
-                          size: 40,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Left illustration
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade100,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    // Right illustration
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade100,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.chat_bubble,
-                          color: Colors.blue,
-                          size: 40,
+                      SizedBox(width: 20),
+                      // Right illustration
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade100,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.chat_bubble,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
                 Text(
                   'Connect easily with \nyour family and friends\n over local areas',
                   textAlign: TextAlign.center,
@@ -70,6 +72,32 @@ class _Landingpage3State extends State<Landingpage3> {
                   ),
                 ),
                 SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // Navigate to the homepage
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(), // Replace HomePage with your homepage widget
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Create Profile',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -77,14 +105,14 @@ class _Landingpage3State extends State<Landingpage3> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 60.0),
-              child:  Text(
-                  'Terms & Privacy Policy',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    decoration: TextDecoration.underline,
-                  ),
+              child: Text(
+                'Terms & Privacy Policy',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                  decoration: TextDecoration.underline,
                 ),
+              ),
             ),
           ),
         ],

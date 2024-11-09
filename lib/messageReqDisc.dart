@@ -1,5 +1,7 @@
 import 'package:link_up/Components/messageReqDiscItem.dart';
 import 'package:flutter/material.dart';
+import 'package:link_up/messageDiscover.dart';
+import 'package:link_up/messagerequest.dart';
 
 class MessageReqDiscScreen extends StatelessWidget {
   @override
@@ -29,6 +31,14 @@ class MessageReqDiscScreen extends StatelessWidget {
                 icon: Icons.chat_bubble,
                 text: 'Connect with your friends\n over local areas',
                 messageText: 'Message Request',
+                onPressed: () {
+                  // Navigate to the homepage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MessageRequestsScreen()),
+                  );
+                },
               ),
             ),
           ),
@@ -47,10 +57,17 @@ class MessageReqDiscScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: MessageReqDiscItem(
-                icon: Icons.person_add,
-                text: 'Discover your new friends\n over local areas',
-                messageText: 'Message Request',
-              ),
+                  icon: Icons.person_add,
+                  text: 'Discover your new friends\n over local areas',
+                  messageText: 'Message Request',
+                  onPressed: () {
+                    // Navigate to the homepage
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MessageDiscoverScreen()),
+                    );
+                  }),
             ),
           ),
         ],

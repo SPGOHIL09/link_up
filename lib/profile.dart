@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_up/home.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,8 +13,16 @@ class _ProfilePageState extends State<ProfilePage> {
   int selectedAvatarIndex = 0;
 
   final List<String> avatarEmojis = [
-    '👨‍💻', '👩‍💻', '🧑‍💼', '👨‍🦰', '👩‍🦰',
-    '👨‍🦱', '👩‍🦱', '🧑‍🤝‍🧑', '👤', '🦸‍♂️'
+    '👨‍💻',
+    '👩‍💻',
+    '🧑‍💼',
+    '👨‍🦰',
+    '👩‍🦰',
+    '👨‍🦱',
+    '👩‍🦱',
+    '🧑‍🤝‍🧑',
+    '👤',
+    '🦸‍♂️'
   ];
 
   @override
@@ -90,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       alignment: WrapAlignment.center,
                       children: List.generate(
                         avatarEmojis.length,
-                            (index) => GestureDetector(
+                        (index) => GestureDetector(
                           onTap: () {
                             setState(() {
                               selectedAvatarIndex = index;
@@ -148,10 +157,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: Color(0xFF375FFF), width: 2),
+                    borderSide:
+                        const BorderSide(color: Color(0xFF375FFF), width: 2),
                   ),
                   hintText: 'Enter your display name',
-                  hintStyle: TextStyle(color: const Color(0xFFF7F7FC).withOpacity(0.5)),
+                  hintStyle: TextStyle(
+                      color: const Color(0xFFF7F7FC).withOpacity(0.5)),
                 ),
               ),
               const SizedBox(height: 32),
@@ -165,6 +176,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         content: Text('Profile updated successfully'),
                         backgroundColor: Color(0xFF375FFF),
                       ),
+                    );
+
+                    // Navigate to the homepage
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HomePage()), // Replace `HomePage` with your actual homepage widget
                     );
                   },
                   style: ElevatedButton.styleFrom(

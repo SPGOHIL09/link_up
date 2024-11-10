@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:link_up/home.dart';
+import 'package:link_up/model/userDetail.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _nameController = TextEditingController();
   int selectedAvatarIndex = 0;
 
-  final List<String> avatarEmojis = [
+  List<String> avatarEmojis = [
     '👨‍💻',
     '👩‍💻',
     '🧑‍💼',
@@ -172,6 +173,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    if(_nameController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter your display name'),
+                          backgroundColor: Color(0xFF375FFF),
+                        ),
+                      );
+                      return;
+                    }
+                    userName = _nameController.text;
+                    avatarEmoji = avatarEmojis[selectedAvatarIndex];
                     // Save profile changes
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

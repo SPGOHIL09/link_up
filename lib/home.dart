@@ -4,6 +4,8 @@ import 'package:link_up/geo_messages.dart';
 import 'package:link_up/messageReqDisc.dart';
 import 'package:link_up/profile.dart';
 
+import 'model/userDetail.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,7 +19,7 @@ class HomePage extends StatelessWidget {
         title: const Row(
           children: [
             Text(
-              'WiFi Direct',
+              'LinkUp',
               style: TextStyle(
                 color: Color(0xFFF7F7FC),
                 fontSize: 22,
@@ -38,9 +40,9 @@ class HomePage extends StatelessWidget {
           Stack(
             children: [
               IconButton(
-                icon: const CircleAvatar(
+                icon:  CircleAvatar(
                   backgroundColor: Color(0xFF375FFF),
-                  child: Icon(Icons.person, color: Colors.white),
+                  child: Text(avatarEmoji, style: TextStyle(fontSize: 23)),
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage()));

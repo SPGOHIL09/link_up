@@ -5,13 +5,15 @@ import 'dart:io';
 import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:link_up/model/userDetail.dart';
 
 
 import 'model/msg.dart';
 enum DeviceType { browser, advertiser }
-final List<Messages> _messages = [
-  Messages(text: 'Heyy, how can i help you today!?', deviceType: DeviceType.browser),
-];
+final ValueNotifier<List<Messages>> _messages = ValueNotifier([
+
+]);
+
 class DeviceListScreen extends StatefulWidget {
   const DeviceListScreen({required this.deviceType});
   final DeviceType deviceType;
@@ -49,7 +51,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
         appBar: AppBar(
           backgroundColor: Color(0xFF152033),
           elevation: 0,
-          title: Text(widget.deviceType.toString().substring(11).toUpperCase()),
+          title: Text("Available Users"),
         ),
         backgroundColor: Color(0xFF0F1828),
         body: ListView.builder(
@@ -72,9 +74,12 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.grey,
-
+                      radius: 24,
+                      backgroundColor: Colors.white,
+                      child: Text(
+                        avatarEmoji,
+                        style: TextStyle(fontSize: 24),
+                      ),
                     ),
                     SizedBox(width: 12),
                     Expanded(
@@ -215,6 +220,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
         nearbyService.invitePeer(
           deviceID: device.deviceId,
           deviceName: device.deviceName,
+
         );
         break;
       case SessionState.connected:
@@ -284,14 +290,15 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
     recieveDataSubscription =
         nearbyService.dataReceivedSubscription(callback: (data) {
       print("dataReceivedSubscription: ${jsonEncode(data)}");
-      _messages.add(Messages(text: data["message"], deviceType: widget.deviceType));
+      _messages.value = List.from(_messages.value)
+        ..add(Messages(text: data["message"], deviceType: widget.deviceType));
       setState(() {});
 
-      showToast(jsonEncode(data),
-          context: context,
-          axis: Axis.horizontal,
-          alignment: Alignment.center,
-          position: StyledToastPosition.bottom);
+      // showToast(jsonEncode(data),
+      //     context: context,
+      //     axis: Axis.horizontal,
+      //     alignment: Alignment.center,
+      //     position: StyledToastPosition.bottom);
     });
   }
 
@@ -303,7 +310,7 @@ class Msc extends StatefulWidget {
   Device device;
   late DeviceType deviceType;
   late NearbyService nearbyService;
-  List<Messages> messages;
+  ValueNotifier<List<Messages>> messages;
   @override
   State<Msc> createState() => _MscState();
 }
@@ -337,7 +344,23 @@ class _MscState extends State<Msc> {
                 children: [
                   // Image.asset("assets/images/chat-bot.png",width: 44),
                   SizedBox(width: 10,),
-                  Text("Demo Chat",style: TextStyle(fontSize: 20,color: Theme.of(context).textTheme.titleLarge!.color),)
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white,
+                    child: Text(
+                      avatarEmoji,
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Text(
+                    widget.device.deviceName,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ]
             ),
             // Icon(
@@ -352,37 +375,42 @@ class _MscState extends State<Msc> {
         children: [
           SizedBox(height: 6,),
           Expanded(
-            child: ListView.builder(
-              itemCount: widget.messages.length,
-              itemBuilder: (context, index) {
-                final message = widget.messages[index];
-                return ListTile(
-                  title: Align(
-                    alignment: message.deviceType != widget.deviceType ? Alignment.centerRight : Alignment.centerLeft,
-                    child: Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            color: message.deviceType != widget.deviceType ? Colors.blue : Colors.grey[300],
-                            borderRadius: message.deviceType != widget.deviceType ?
-                            BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ) :
-                            BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            )
-                        ),
-                        child: Text(
-                          message.text,
-                          style: TextStyle(color: message.deviceType != widget.deviceType ? Colors.white : Colors.black),
-                        )
+            child: ValueListenableBuilder(
+              valueListenable: _messages,
+              builder: (context, value, child) => ListView.builder(
+                itemCount: widget.messages.value.length,
+                itemBuilder: (context, index) {
+                  final message = widget.messages.value[index];
+                  return ListTile(
+                    title: Align(
+                      alignment: message.deviceType != widget.deviceType ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: message.deviceType != widget.deviceType ? Colors.blue : Colors.grey[300],
+                              borderRadius: message.deviceType != widget.deviceType ?
+                              BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ) :
+                              BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              )
+                          ),
+                          child: Text(
+                            message.text,
+                            style: TextStyle(color: message.deviceType != widget.deviceType ? Colors.white : Colors.black),
+                          )
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
+
+
             ),
           ),
 
@@ -420,7 +448,7 @@ class _MscState extends State<Msc> {
                   IconButton(
                       onPressed: (){
                         widget.nearbyService.sendMessage(widget.device.deviceId, _controller.text);
-                        _messages.add(Messages(text: _controller.text, deviceType: widget.deviceType == DeviceType.advertiser ? DeviceType.browser : DeviceType.advertiser));
+                        _messages.value.add(Messages(text: _controller.text, deviceType: widget.deviceType == DeviceType.advertiser ? DeviceType.browser : DeviceType.advertiser));
                         _controller.text = '';
                         setState(() {});
                       },

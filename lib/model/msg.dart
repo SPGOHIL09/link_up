@@ -1,6 +1,9 @@
+import 'package:link_up/userList.dart';
+
 class Messages {
   final String text;
-  final bool isUser;
+  final DeviceType deviceType;
 
-  Messages({required this.text, required this.isUser});
+
+  Messages({required this.text, required this.deviceType});
 }

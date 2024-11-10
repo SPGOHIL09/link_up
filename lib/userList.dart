@@ -9,7 +9,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 import 'model/msg.dart';
 enum DeviceType { browser, advertiser }
-
+final List<Messages> _messages = [
+  Messages(text: 'Heyy, how can i help you today!?', deviceType: DeviceType.browser),
+];
 class DeviceListScreen extends StatefulWidget {
   const DeviceListScreen({required this.deviceType});
   final DeviceType deviceType;
@@ -24,6 +26,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
   late StreamSubscription subscription;
   late StreamSubscription recieveDataSubscription;
   bool isInit = false;
+
 
   @override
   void initState() {
@@ -64,7 +67,7 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
 
               ),
               child: InkWell(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Msc(device: device, deviceType : widget.deviceType, nearbyService: nearbyService))),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Msc(device: device, deviceType : widget.deviceType, nearbyService: nearbyService, messages: _messages))),
 
                 child: Row(
                   children: [
@@ -281,6 +284,9 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
     recieveDataSubscription =
         nearbyService.dataReceivedSubscription(callback: (data) {
       print("dataReceivedSubscription: ${jsonEncode(data)}");
+      _messages.add(Messages(text: data["message"], deviceType: widget.deviceType));
+      setState(() {});
+
       showToast(jsonEncode(data),
           context: context,
           axis: Axis.horizontal,
@@ -288,22 +294,30 @@ class _DeviceListScreenState extends State<DeviceListScreen> {
           position: StyledToastPosition.bottom);
     });
   }
+
 }
+
+
 class Msc extends StatefulWidget {
-  Msc({ required this.device, required this.deviceType, required this.nearbyService});
+  Msc({ required this.device, required this.deviceType, required this.nearbyService, required this.messages});
   Device device;
   late DeviceType deviceType;
   late NearbyService nearbyService;
+  List<Messages> messages;
   @override
   State<Msc> createState() => _MscState();
 }
 
 class _MscState extends State<Msc> {
   final TextEditingController _controller = TextEditingController();
-  final List<Messages> _messages = [
-    Messages(text: 'Heyy, how can i help you today!?', isUser: false),
-  ];
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+
+    });
+  }
 
 
   @override
@@ -339,17 +353,17 @@ class _MscState extends State<Msc> {
           SizedBox(height: 6,),
           Expanded(
             child: ListView.builder(
-              itemCount: _messages.length,
+              itemCount: widget.messages.length,
               itemBuilder: (context, index) {
-                final message = _messages[index];
+                final message = widget.messages[index];
                 return ListTile(
                   title: Align(
-                    alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment: message.deviceType != widget.deviceType ? Alignment.centerRight : Alignment.centerLeft,
                     child: Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: message.isUser ? Colors.blue : Colors.grey[300],
-                            borderRadius: message.isUser ?
+                            color: message.deviceType != widget.deviceType ? Colors.blue : Colors.grey[300],
+                            borderRadius: message.deviceType != widget.deviceType ?
                             BorderRadius.only(
                               topLeft: Radius.circular(20),
                               bottomLeft: Radius.circular(20),
@@ -363,7 +377,7 @@ class _MscState extends State<Msc> {
                         ),
                         child: Text(
                           message.text,
-                          style: TextStyle(color: message.isUser ? Colors.white : Colors.black),
+                          style: TextStyle(color: message.deviceType != widget.deviceType ? Colors.white : Colors.black),
                         )
                     ),
                   ),
@@ -406,7 +420,9 @@ class _MscState extends State<Msc> {
                   IconButton(
                       onPressed: (){
                         widget.nearbyService.sendMessage(widget.device.deviceId, _controller.text);
+                        _messages.add(Messages(text: _controller.text, deviceType: widget.deviceType == DeviceType.advertiser ? DeviceType.browser : DeviceType.advertiser));
                         _controller.text = '';
+                        setState(() {});
                       },
                       icon: Icon(Icons.send_rounded, color: Colors.blue.shade300,)
                   )
@@ -420,4 +436,6 @@ class _MscState extends State<Msc> {
     );
   }
 
+
 }
+
